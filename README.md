@@ -26,7 +26,8 @@ koprs/
 │   └── koprs-admission/        # validating admission webhook server
 └── examples/
     ├── configmapsync/          # single CRD, single controller
-    └── multicontroller/        # multiple CRDs, multiple controllers in one operator
+    ├── multicontroller/        # multiple CRDs, multiple controllers in one operator
+    └── apiconfigsync/          # controller + admission webhook + external HTTP polling
 ```
 
 ## Getting started
@@ -37,6 +38,7 @@ For working end-to-end examples, see:
 
 * [configmapsync](./examples/configmapsync/README.md) — a single CRD reconciled by one controller; the best starting point.
 * [multicontroller](./examples/multicontroller/README.md) — multiple CRDs (`SecretSync`, `ServiceAccountSync`) each reconciled by its own controller, run side by side in one operator binary.
+* [apiconfigsync](./examples/apiconfigsync/README.md) — combines all three crates: a controller that polls an external HTTP API (`koprs-external`) to sync config into a ConfigMap, plus a co-located validating admission webhook (`koprs-admission`) that enforces spec rules before the CR is persisted.
 
 ### Minimal example
 
@@ -120,7 +122,9 @@ For finalizers, owned-resource reconciliation, garbage collection, events, and l
 election, see the [configmapsync operator](./examples/configmapsync/README.md), it
 walks through the same building blocks in a complete, runnable operator. To see how to
 run several CRDs and controllers from a single operator binary, see
-[multicontroller](./examples/multicontroller/README.md).
+[multicontroller](./examples/multicontroller/README.md). To see how to add an admission
+webhook and poll an external HTTP API alongside a controller, see
+[apiconfigsync](./examples/apiconfigsync/README.md).
 
 ## Contributing
 
