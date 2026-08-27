@@ -1149,7 +1149,7 @@ dependencies = [
 
 [[package]]
 name = "koprs"
-version = "0.9.8"
+version = "0.9.9"
 dependencies = [
  "axum",
  "bytes",
@@ -1175,7 +1175,7 @@ dependencies = [
 
 [[package]]
 name = "koprs-admission"
-version = "0.9.1"
+version = "0.9.2"
 dependencies = [
  "axum",
  "bytes",
@@ -1198,7 +1198,7 @@ dependencies = [
 
 [[package]]
 name = "koprs-external"
-version = "0.9.1"
+version = "0.9.2"
 dependencies = [
  "axum",
  "bytes",
