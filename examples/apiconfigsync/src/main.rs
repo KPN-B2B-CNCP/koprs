@@ -65,15 +65,11 @@ async fn main() -> anyhow::Result<()> {
     //       valueFrom:
     //         fieldRef:
     //           fieldPath: metadata.namespace
-    let operator_ns =
-        std::env::var("OPERATOR_NAMESPACE").unwrap_or_else(|_| "default".to_string());
+    let operator_ns = std::env::var("OPERATOR_NAMESPACE").unwrap_or_else(|_| "default".to_string());
 
     // Drive the controller loop and webhook server concurrently.
     // If either task returns an error, the other is cancelled and the process exits.
-    tokio::try_join!(
-        run_controller(client, operator_ns),
-        run_webhook(),
-    )?;
+    tokio::try_join!(run_controller(client, operator_ns), run_webhook(),)?;
 
     Ok(())
 }
@@ -117,8 +113,7 @@ async fn run_controller(client: Client, operator_ns: String) -> anyhow::Result<(
 async fn run_webhook() -> anyhow::Result<()> {
     let cert_path =
         std::env::var("WEBHOOK_TLS_CERT").unwrap_or_else(|_| "/tls/tls.crt".to_string());
-    let key_path =
-        std::env::var("WEBHOOK_TLS_KEY").unwrap_or_else(|_| "/tls/tls.key".to_string());
+    let key_path = std::env::var("WEBHOOK_TLS_KEY").unwrap_or_else(|_| "/tls/tls.key".to_string());
 
     let mut builder = WebhookBuilder::new()
         .port(8443)
