@@ -1,14 +1,16 @@
 [package]
-name = "configmapsync-operator"
+name = "apiconfigsync-operator"
 version = "0.1.0"
 edition.workspace = true
 
 [[bin]]
-name = "configmapsync-operator"
+name = "apiconfigsync-operator"
 path = "src/main.rs"
 
 [dependencies]
 koprs = { path = "../../crates/koprs" }
+koprs-admission = { path = "../../crates/koprs-admission" }
+koprs-external = { path = "../../crates/koprs-external" }
 kube = { workspace = true }
 k8s-openapi = { version = "0.25.0", features = ["v1_33"] }
 schemars.workspace = true
